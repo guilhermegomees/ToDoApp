@@ -9,3 +9,6 @@ app.db
 
 # User secrets
 **/secrets.json
+
+# Visual studio
+/.vs/TodoApp
