@@ -5,7 +5,7 @@ using TodoApp.Application.Tasks;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Adicionar DbContext
+// DbContext
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     var cs = builder.Configuration.GetConnectionString("Default");
@@ -22,23 +22,23 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlite(cs);
 });
 
-// Registrar Repositórios
+// DI: Repository e Service
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 
-// Adicionar controllers
+// Controllers
 builder.Services.AddControllers();
 
-// Adicionar Swagger
+// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Configurar CORS
+// CORS
 builder.Services.AddCors(opt => opt.AddDefaultPolicy(p =>
     p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
 var app = builder.Build();
 
-// Usar Swagger e CORS
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -1,6 +1,6 @@
-using TodoApp.Domain.Entities;
+﻿using TodoApp.Domain.Entities;
 
-namespace TodoApp.Application.Tasks;
+namespace TodoApp.Infrastructure.Repositories;
 
 public interface ITaskRepository
 {

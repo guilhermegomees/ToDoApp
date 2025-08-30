@@ -1,5 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using TodoApp.Application.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using TodoApp.Domain.Entities;
 using TodoApp.Infrastructure.Persistence;
 
@@ -17,8 +16,8 @@ public sealed class TaskRepository(AppDbContext db) : ITaskRepository
     public Task<TaskItem?> GetAsync(int id, CancellationToken ct = default) =>
         db.Tasks.FirstOrDefaultAsync(t => t.Id == id, ct);
 
-    public async Task AddAsync(TaskItem entity, CancellationToken ct = default) =>
-        await db.Tasks.AddAsync(entity, ct);
+    public Task AddAsync(TaskItem entity, CancellationToken ct = default) =>
+        db.Tasks.AddAsync(entity, ct).AsTask();
 
     public async Task<bool> RemoveAsync(int id, CancellationToken ct = default)
     {
