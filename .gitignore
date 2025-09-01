@@ -1,6 +1,42 @@
-# Build
-bin/
-obj/
+# Geral / SO / logs
+.DS_Store
+Thumbs.db
+logs
+*.log
+*.tmp
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.sw?
+
+# Editores
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Frontend (Node/Vite/React)
+**/node_modules/
+**/dist/
+**/dist-ssr/
+**/.vite/
+**/coverage/
+*.tsbuildinfo
+.eslintcache
+
+# Variáveis de ambiente
+**/.env
+**/.env.local
+**/.env.*.local
+!**/.env.example
+
+# Backend (.NET / Visual Studio)
+**/bin/
+**/obj/
+.vs/
+*.user
+*.rsuser
 
 # SQLite local
 app.db
@@ -9,4 +45,3 @@ app.db
 
 # User secrets
 **/secrets.json
-/.vs/TodoApp
