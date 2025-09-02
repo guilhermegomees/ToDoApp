@@ -6,9 +6,9 @@ namespace TodoApp.Application.Tasks;
 
 public sealed class TaskService(ITaskRepository repo) : ITaskService
 {
-    public async Task<IEnumerable<TaskDto>> ListAsync(bool? isCompleted, CancellationToken ct = default)
+    public async Task<IEnumerable<TaskDto>> ListAsync(Domain.Entities.TaskStatus? status, CancellationToken ct = default)
     {
-        var items = await repo.ListAsync(isCompleted, ct);
+        var items = await repo.ListAsync(status, ct);
         return items.Select(i => i.ToDto());
     }
 
@@ -20,11 +20,12 @@ public sealed class TaskService(ITaskRepository repo) : ITaskService
 
     public async Task<TaskDto> CreateAsync(CreateTaskRequest req, CancellationToken ct = default)
     {
-        // validações de negócio simples
         if (string.IsNullOrWhiteSpace(req.Title))
             throw new ArgumentException("Título é obrigatório.", nameof(req.Title));
 
         var entity = new TaskItem(req.Title, req.Description);
+        entity.SetStatus(req.Status);
+
         await repo.AddAsync(entity, ct);
         await repo.SaveChangesAsync(ct);
         return entity.ToDto();
@@ -37,7 +38,7 @@ public sealed class TaskService(ITaskRepository repo) : ITaskService
 
         if (!string.IsNullOrWhiteSpace(req.Title)) e.SetTitle(req.Title);
         if (req.Description is not null) e.SetDescription(req.Description);
-        if (req.IsCompleted.HasValue) e.ToggleCompleted(req.IsCompleted.Value);
+        if (req.Status.HasValue) e.SetStatus(req.Status.Value);
 
         await repo.SaveChangesAsync(ct);
         return e.ToDto();

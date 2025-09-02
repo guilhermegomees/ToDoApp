@@ -26,9 +26,13 @@ export default function ConfirmDialog({
       <DialogContent>
         <Typography>{message}</Typography>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>{cancelText}</Button>
-        <Button onClick={onConfirm} variant="contained" autoFocus>
+      <DialogActions
+        sx={{
+          padding: "0 24px 20px"
+        }}
+      >
+        <Button onClick={onClose} color="inherit" variant="outlined">{cancelText}</Button>
+        <Button onClick={onConfirm} color="error" variant="contained" autoFocus>
           {confirmText}
         </Button>
       </DialogActions>

@@ -1,8 +1,10 @@
+import type { TaskStatus } from "./status";
+
 export interface TaskDto {
   id: number;
   title: string;
   description?: string | null;
-  isCompleted: boolean;
+  status: TaskStatus;
 }
 
 export interface CreateTaskRequest {
@@ -13,5 +15,5 @@ export interface CreateTaskRequest {
 export interface UpdateTaskRequest {
   title?: string;
   description?: string | null;
-  isCompleted?: boolean;
+  status?: TaskStatus;
 }

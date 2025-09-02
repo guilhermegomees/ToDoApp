@@ -2,20 +2,18 @@ namespace TodoApp.Domain.Entities;
 
 public sealed class TaskItem
 {
-    private TaskItem()
-    {
-        
-    }
+    private TaskItem() { }
 
     public int Id { get; private set; }
     public string Title { get; private set; } = null!;
     public string Description { get; private set; } = string.Empty;
-    public bool IsCompleted { get; private set; }
+    public TaskStatus Status { get; private set; } = TaskStatus.NotStarted;
 
     public TaskItem(string title, string? description)
     {
         SetTitle(title);
         SetDescription(description);
+        Status = TaskStatus.NotStarted;
     }
 
     public void SetTitle(string title)
@@ -28,5 +26,5 @@ public sealed class TaskItem
     public void SetDescription(string? description) =>
         Description = (description ?? string.Empty).Trim();
 
-    public void ToggleCompleted(bool completed) => IsCompleted = completed;
+    public void SetStatus(TaskStatus status) => Status = status;
 }

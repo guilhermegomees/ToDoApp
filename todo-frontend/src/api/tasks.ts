@@ -1,9 +1,8 @@
 import { api } from "./client";
 import type { TaskDto, CreateTaskRequest, UpdateTaskRequest } from "../types";
 
-export async function listTasks(isCompleted?: boolean | null): Promise<TaskDto[]> {
+export async function listTasks(): Promise<TaskDto[]> {
   const params: Record<string, boolean> = {};
-  if (typeof isCompleted === "boolean") params.isCompleted = isCompleted;
   const { data } = await api.get<TaskDto[]>("/api/Tasks", { params });
   return data;
 }

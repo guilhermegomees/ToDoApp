@@ -6,11 +6,13 @@ namespace TodoApp.Infrastructure.Repositories;
 
 public sealed class TaskRepository(AppDbContext db) : ITaskRepository
 {
-    public async Task<List<TaskItem>> ListAsync(bool? isCompleted, CancellationToken ct = default)
+    public async Task<IEnumerable<TaskItem>> ListAsync(Domain.Entities.TaskStatus? status, CancellationToken ct = default)
     {
-        var query = db.Tasks.AsNoTracking();
-        if (isCompleted is not null) query = query.Where(t => t.IsCompleted == isCompleted);
-        return await query.OrderBy(t => t.IsCompleted).ThenBy(t => t.Title).ToListAsync(ct);
+        var query = db.Tasks.AsQueryable();
+        if (status.HasValue)
+            query = query.Where(t => t.Status == status.Value);
+
+        return await query.ToListAsync(ct);
     }
 
     public Task<TaskItem?> GetAsync(int id, CancellationToken ct = default) =>

@@ -13,9 +13,9 @@ namespace TodoApp.Api.Controllers
         public TasksController(ITaskService service) => _service = service;
 
         [HttpGet]
-        public async Task<IActionResult> GetTasks([FromQuery] bool? isCompleted, CancellationToken ct)
+        public async Task<IActionResult> GetTasks([FromQuery] Domain.Entities.TaskStatus? status, CancellationToken ct)
         {
-            var list = await _service.ListAsync(isCompleted, ct);
+            var list = await _service.ListAsync(status, ct);
             return Ok(list);
         }
 
