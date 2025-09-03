@@ -4,7 +4,7 @@ import {
   Button, TextField, Stack
 } from "@mui/material";
 import type { CreateTaskRequest, TaskDto, UpdateTaskRequest } from "../types";
-import { TaskStatus } from "../status";
+import { TaskStatus } from "../constants/status";
 
 type Props = {
   open: boolean;

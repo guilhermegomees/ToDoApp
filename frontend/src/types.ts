@@ -1,4 +1,4 @@
-import type { TaskStatus } from "./status";
+import type { TaskStatus } from "./constants/status";
 
 export interface TaskDto {
   id: number;

@@ -15,8 +15,8 @@ import { createTask, updateTask, deleteTask } from "./api/tasks";
 import TaskFormDialog from "./components/TaskFormDialog";
 import ConfirmDialog from "./components/ConfirmDialog";
 import { useTaskList } from "./hooks/useTaskList";
-import { TaskStatus } from "./status";
-import { TaskStatusMap } from "./status";
+import { TaskStatus } from "./constants/status";
+import { TaskStatusMap } from "./constants/status";
 
 // mapeia status para as colunas
 const columns = Object.values(TaskStatus).map((status) => TaskStatusMap[status]);
