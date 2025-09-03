@@ -1,87 +1,90 @@
-# ToDoApp ✅
+# 📌 TodoApp
 
-API simples de tarefas usando **.NET 8 (Minimal API)**, **Entity Framework Core** e **SQLite**, estruturada em camadas: **API → Application → Domain → Infrastructure**.
+Aplicação **fullstack** para gerenciamento de tarefas, desenvolvida em **.NET 8 (C#)** no backend e **React + Vite** no frontend.
 
-### 📦 Tecnologias
+---
 
-- [.NET 8](https://dotnet.microsoft.com/) (Minimal API)
-- [Entity Framework Core](https://learn.microsoft.com/ef/) (SQLite)
-- Arquitetura em camadas (inspirada em Clean Architecture)
-- Swagger (habilitado apenas em **Development**)
+## 🚀 Tecnologias Utilizadas
 
-### 🚀 Como rodar localmente
+### Backend
+- [.NET 8](https://dotnet.microsoft.com/)  
+- Entity Framework Core  
+- SQLite  
 
-### 1. Pré-requisitos
+### Frontend
+- [React](https://reactjs.org/)  
+- [Vite](https://vitejs.dev/)  
+- [TypeScript](https://www.typescriptlang.org/)  
+- [MUI](https://mui.com/) (Material UI)  
 
-- .NET SDK 8.0 ou superior
-- EF Core Tools (opcional, para migrations)
+---
+
+## ⚙️ Como rodar o projeto
+
+### 1. Clone o repositório
+```bash
+git clone https://github.com/guilhermegomees/ToDoApp
+cd TodoApp
 ```
-dotnet tool install -g dotnet-ef
+
+### 2. Instale o .NET 8
+Baixe e instale o [.NET 8 SDK](https://dotnet.microsoft.com/download?utm_source=chatgpt.com)
+
+Verifique a instalação:
+```bash
+dotnet --version
 ```
 
-### 2. Restaurar e compilar
-```
-dotnet restore
-dotnet build
+### 3. Atualize o Node.js
+Baixe a versão LTS mais recente do [Node.js](https://nodejs.org/?utm_source=chatgpt.com)
+Verifique a instalação:
+```bash
+node -v
+npm -v
 ```
 
-### 3. Rodar API (Development)
-
-No projeto da API:
+### 4. Configure o banco de dados (SQLite)
+Acesse a API:
+```bash
+cd backend/TodoApp.API
 ```
-cd src/TodoApp.API
+Crie o banco rodando as migrations:
+```bash
+dotnet ef database update
+```
+O arquivo do banco SQLite (.db) será gerado automaticamente no diretório configurado (TodoApp.API).
+
+### 5. Inicie o backend
+Ainda dentro de backend/TodoApp.API:
+```bash
 dotnet run
 ```
-Em Development, se a connection string não for configurada, o app cria/usa automaticamente um banco SQLite local app.db.
+O backend será iniciado em http://localhost:5134
 
-A API sobe em:
-
-👉 Swagger: https://localhost:5134/swagger
-
-### 4. Criar banco/tabelas (EF Migrations)
-```
-cd src/TodoApp.API
-dotnet ef database update
-```
-Isso cria o banco app.db com a tabela Tasks.
-
-
-### 🔧 Configuração de Connection String
-
-### Development
-
-Você pode usar o fallback SQLite local ou configurar via User Secrets:
-```
-cd src/TodoApp.API
-dotnet user-secrets init
-dotnet user-secrets set "ConnectionStrings:Default" "Data Source=app.db"
+### 6. Acesse a pasta do frontend
+Abra outro terminal, vá até a pasta do frontend e instale as dependências:
+```bash
+cd frontend
+npm install
 ```
 
-### 📚 Endpoints
-
-Base: /tasks
-
-| Método | Rota                      | Descrição               | Status codes      |
-| ------ | ------------------------- | ----------------------- | ----------------- |
-| GET    | `/tasks?isCompleted=true` | Lista tarefas filtradas | 200               |
-| GET    | `/tasks/{id}`             | Detalhe da tarefa       | 200, 404          |
-| POST   | `/tasks`                  | Cria tarefa             | 200 (ou 201)      |
-| PUT    | `/tasks/{id}`             | Atualiza tarefa         | 200, 400, 404     |
-| DELETE | `/tasks/{id}`             | Remove tarefa           | 200 (ou 204), 404 |
-
-### 🛠️ Comandos úteis
-
-### Criar migration:
+### 7. Inicie o frontend
+```bash
+npm run dev
 ```
-dotnet ef migrations add Init
-```
+O frontend será iniciado em http://localhost:5173
 
-### Atualizar banco:
-```
-dotnet ef database update
+## 📂 Estrutura do Projeto
+
+```bash
+/backend
+   /TodoApp.API
+   /TodoApp.Application
+   /TodoApp.Domain
+   /TodoApp.Infrastructure
+/frontend
+   /src
 ```
 
-### Rodar aplicação:
-```
-dotnet run --project src/TodoApp.API
-```
+## 📄 Licença
+Este projeto está sob a licença MIT.
