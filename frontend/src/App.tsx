@@ -3,7 +3,6 @@ import {
   AppBar, Toolbar, Typography, Container, IconButton,
   Tooltip, CircularProgress, Snackbar, Alert, Button,
   Paper, Stack, Card, CardContent, Box,
-  Chip
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
@@ -73,10 +72,10 @@ export default function App() {
 
   // agrupar tarefas por status
   const groupedTasks: Record<string, TaskDto[]> = {};
-  columns.forEach((col) => (groupedTasks[col.key] = []));
-  tasks.forEach((t) => {
-    const col = TaskStatusMap[t.status as TaskStatus];
-    if (col) groupedTasks[col.key].push(t);
+    columns.forEach((col) => (groupedTasks[col.key] = []));
+    tasks.forEach((t) => {
+      const col = TaskStatusMap[t.status as TaskStatus];
+      if (col) groupedTasks[col.key].push(t);
   });
 
   function handleDragEnd(result: DropResult) {
@@ -107,7 +106,7 @@ export default function App() {
       <AppBar position="sticky" sx={{ backgroundColor: "#edf1fc !important" }}>
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1, color: "#323338", fontWeight: "700" }}>
-            ToDo
+            ToDo App
           </Typography>
 
           <Tooltip title="Recarregar">
@@ -251,17 +250,6 @@ export default function App() {
                                       {t.description}
                                     </Typography>
 
-                                    {/* Status como chip */}
-                                    {/* <Chip
-                                      label={TaskStatusMap[t.status].label}
-                                      size="small"
-                                      sx={{
-                                        mt: 1,
-                                        bgcolor: TaskStatusMap[t.status].color,
-                                        color: "#fff",
-                                        fontWeight: 600,
-                                      }}
-                                    /> */}
                                     <Box display={"inline-flex"} gap={"5px"} sx={{ bgcolor: "#f0f0f1", borderRadius: "5px", mt: "10px" }}>
                                       <Box sx={{ bgcolor: TaskStatusMap[t.status].color, borderRadius: "5px 0 0 5px", height: "25px", width: "5px"}}/>
                                       <Typography sx={{ color: "#323338", fontWeight: 500, fontSize: "12px", padding: "3px 6px 3px 0" }}>{TaskStatusMap[t.status].label}</Typography>
@@ -349,6 +337,7 @@ export default function App() {
         open={openForm}
         initial={editing ?? { status: defaultStatus ?? TaskStatus.NotStarted }}
         onClose={() => { setOpenForm(false); setEditing(null); setDefaultStatus(null); }}
+        isEdit={editing ? true : false}
         onSubmit={(payload) => {
           if (editing) {
             updateMut.mutate({ id: editing.id, payload: payload as UpdateTaskRequest });

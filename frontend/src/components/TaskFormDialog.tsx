@@ -11,11 +11,10 @@ type Props = {
   onClose: () => void;
   onSubmit: (payload: CreateTaskRequest | UpdateTaskRequest) => void;
   initial?: Partial<TaskDto>;
+  isEdit?: boolean;
 };
 
-export default function TaskFormDialog({ open, initial, onClose, onSubmit }: Props) {
-  const isEdit = !!initial;
-
+export default function TaskFormDialog({ open, initial, isEdit, onClose, onSubmit }: Props) {
   const [title, setTitle] = React.useState(initial?.title ?? "");
   const [description, setDescription] = React.useState(initial?.description ?? "");
   const [status, setStatus] = React.useState<TaskStatus>(initial?.status ?? TaskStatus.NotStarted);
